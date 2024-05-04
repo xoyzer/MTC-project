@@ -22,6 +22,31 @@ export default {
     src: url("/src/fonts/Inter-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Inter Bold";
+    src: url("/src/fonts/Inter-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Inter Medium";
+    src: url("/src/fonts/Inter-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Poppins Medium";
+    src: url("/src/fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Poppins SemiBold";
+    src: url("/src/fonts/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Manrope Bold";
+    src: url("/src/fonts/Manrope-Bold.ttf");
+}
+
 * {
     box-sizing: border-box;
     font-family: Inter Regular;
@@ -49,7 +74,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 10px;
     gap: 10px;
     height: 100%;
 }
@@ -84,9 +109,7 @@ a {
 }
 
 h3 {
-    color: #076289;
     margin: 0;
-    margin-bottom: 10px;
 }
 
 h4 {
@@ -97,17 +120,25 @@ h4 {
     font-size: 48px;
     margin: 10px auto;
     padding: 0 auto;
+    margin-bottom: 80px;
     text-align: center;
+}
+
+.header-left-side {
+    font-size: 48px;
+    margin-bottom: 10px;
+    margin: 0 0 50px 0;
 }
 
 .info-left-side {
     margin-top: 30px;
     display: flex;
+    flex-direction: column;
 }
 
 .left-side-bar {
-    width: 620px;
-    height: 100vh;
+    width: 720px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,7 +150,7 @@ h4 {
     position: absolute;
     top: 0;
     right: -10px; /* Расстояние от правого края */
-    height: 100%; /* Высота равная высоте родительского элемента */
+    bottom: 0;
     width: 11px; /* Ширина линии */
     background-color: #96d3ff; /* Цвет линии */
 }
@@ -133,7 +164,6 @@ h4 {
 
 .both-bars {
     display: flex;
-    justify-content: center;
 }
 
 .right-side-bar {
@@ -150,11 +180,22 @@ h4 {
     height: 367px;
     border: 1px solid black;
     display: flex;
-    gap: 200px;
+    gap: 100px;
+    overflow-x: hidden;
+}
+
+button {
+    border: 0px;
+    cursor: pointer;
+    background-color: white;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 .post-container-column {
     margin-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .address {
@@ -188,6 +229,10 @@ h4 {
     font-size: 13px;
 }
 
+.added-service > h4 {
+    font-weight: 600;
+}
+
 .service-container {
     display: inline-block;
 }
@@ -196,7 +241,7 @@ h4 {
     background-color: #6c7072;
     display: flex;
     align-items: center; /* Центрируем содержимое по вертикали */
-    justify-content: center;
+    justify-content: space-around;
     height: 101px;
 }
 
@@ -333,7 +378,10 @@ h4 {
     margin: 0;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
     font-weight: 500;
 }
 
@@ -434,6 +482,612 @@ h1 {
     gap: 20px;
 }
 
+.login-to-application-header {
+    font-family: Inter Regular;
+    font-size: 12px;
+    color: #4197e7;
+}
+
+.map-search-container {
+    width: 360px;
+    height: 181px;
+    background-color: #c7d3ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.map-search-container h1 {
+    font-family: Inter Medium;
+    font-size: 16px;
+    text-align: center;
+    margin: 30px 0 50px 0;
+}
+
+.map-input {
+    width: 320px;
+    height: 53px;
+    background-image: url("./assets/map2.png");
+    background-repeat: no-repeat;
+    background-position: 4% center;
+    padding: 0 10px 0 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.map {
+    width: 360px;
+    height: 459px;
+    margin: 0 auto;
+}
+
+.appointment-header {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.appointment-header h1 {
+    font-family: Inter Medium;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px 0 10px 0;
+}
+
+.appointment-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.appointment-container-first {
+    width: 320px;
+    height: 212px;
+    border: 2px solid #2788e2;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    gap: 50px;
+}
+
+.appointment-container-second {
+    width: 320px;
+    height: 283px;
+    border: 2px solid #2788e2;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    gap: 10px;
+    overflow-x: hidden;
+}
+
+.appointment-container-second h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.appointment-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appointment-block:first-child {
+    background: black;
+}
+
+.appointment-info-container {
+    position: relative;
+}
+
+.appointment-date-time {
+    position: relative;
+}
+
+.input-appointment-info-container {
+    width: 180px;
+    height: 37px;
+    padding: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background: #f8f5f5;
+    font-size: 14px;
+    padding: 0 30px 0 10px;
+}
+
+.highlighted-appointment-info::placeholder {
+    color: #000000;
+}
+
+.appointment-date-time h3 {
+    text-align: center;
+    font-family: Inter Medium;
+    font-size: 14px;
+    color: #989898;
+    margin-bottom: 5px;
+}
+
+.appointment-date-input {
+    width: 309px;
+    height: 35px;
+    border: 2px solid #2788e2;
+    border-radius: 15px;
+    background-image: url("./assets/calendar.png");
+    background-repeat: no-repeat;
+    background-position: 4% center;
+    padding: 0 40px;
+}
+
+.appointment-time-input {
+    width: 309px;
+    height: 35px;
+    border: 2px solid #2788e2;
+    border-radius: 15px;
+    background-image: url("./assets/watch (2).png");
+    background-repeat: no-repeat;
+    background-position: 4% center;
+    padding: 0 40px;
+}
+
+.appointment-footer {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#modal-appointment {
+    width: 320px;
+    margin: 0 auto;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.overlay {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    /* background-color: rgba(0, 0, 0, 0.3); */
+}
+
+.btn-modal-appointment {
+    width: 320px;
+    height: 32px;
+    text-align: center;
+    font-family: Inter Medium;
+    font-size: 14px;
+}
+
+.success-block {
+    display: none;
+    width: 282px;
+    height: 259px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #0afd05;
+}
+
+.selected {
+    background: #b0d6e5;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: center;
+    margin: 10px 20px;
+    gap: 120px;
+}
+
+.cart-header h1 {
+    font-family: Inter Medium;
+    font-size: 16px;
+}
+
+.cart-main {
+    margin: 0 auto;
+    width: 360px;
+    height: 488px;
+    border: 1px solid #859bec;
+    border-radius: 10px;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-main-column.goods.show {
+    /* display: flex; */
+}
+
+.cart-main-column h3 {
+    font-family: Inter Medium;
+    font-size: 13px;
+}
+
+.cart-main-column p {
+    color: #1843dd;
+    font-family: Inter Medium;
+    font-size: 13px;
+    margin: 0;
+}
+
+.cart-main-column h2 {
+    font-family: Inter Medium;
+    font-size: 15px;
+    margin: 0;
+}
+
+.cart-main-column.goods {
+    display: none;
+}
+
+.cart-main-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 5px;
+}
+
+.cart-main-column a {
+    /* display: none; */
+}
+
+.cart-main-column.goods {
+    border: 2px solid #0085ff;
+    border-radius: 10px 0 0 10px;
+    width: 221px;
+    margin: 0;
+    padding: 5px 10px 0 10px;
+}
+
+.cart-main-column.goods span {
+    font-family: Inter Medium;
+    font-size: 13px;
+}
+
+.good-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+    border-bottom: 1px solid #e4e6ec;
+}
+
+.arrow-right-goods {
+    /* background-image: url("./assets/arrow-right-goods.png");
+    background-repeat: no-repeat;*/
+}
+
+.cart-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 10px;
+    gap: 50px;
+}
+
+.cart-footer h1 {
+    font-family: Inter Medium;
+    font-size: 14px;
+}
+
+.user-orders-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 360px;
+    height: 435px;
+    overflow-x: hidden;
+    border: 1px solid #0038ff;
+    border-radius: 5px;
+    margin: 0 auto;
+    gap: 5px;
+}
+
+.user-orders-header {
+    text-align: center;
+}
+
+.user-order {
+    width: 348px;
+    height: 44px;
+    border: 2px solid #2788e2;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 0 0 0 10px;
+    gap: 20px;
+}
+
+.user-orders-header h1 {
+    font-size: 20px;
+}
+
+.order-more.show {
+    /* display: block; */
+}
+
+.order-more {
+    display: none;
+    width: 337px;
+    height: 231px;
+    border: 1px solid #0c2c7e;
+    border-radius: 10px;
+    padding: 0 0 0 20px;
+}
+
+.order-more p {
+    font-size: 14px;
+}
+
+.order-more li {
+    list-style-type: disc;
+}
+
+.order-button-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 60px;
+}
+
+.selected-cart-sevice {
+    display: flex;
+    background-color: #d9d9d9;
+    align-items: center;
+    border-radius: 5px; /* закругление углов рамки */
+    padding: 5px; /* отступ внутри рамки */
+    width: fit-content; /* ширина рамки будет подстраиваться под содержимое */
+    padding: 5px 15px 5px 0;
+}
+
+.selected-cart-sevice h3 {
+    font-family: Inter Medium;
+    font-size: 13px;
+    margin: 0;
+}
+
+.selected-cart-sevice img {
+}
+
+.user-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 100px 0 0 0;
+    padding: 10px;
+    align-items: center;
+}
+
+.user-password h3 {
+    font-family: Manrope Bold;
+    font-size: 12px;
+    color: #76a8de;
+    text-align: end;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.user-password {
+    position: relative;
+}
+
+.user-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.user-container {
+    position: relative;
+}
+
+.or-line {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.or-line img {
+}
+
+.user-input {
+    border: 1px solid #4197e7;
+    border-radius: 15px;
+    padding-left: 10px;
+    font-family: Inter Regular;
+    font-size: 15px;
+    width: 309px;
+    height: 35px;
+    display: flex;
+}
+
+.user-login-pic {
+    background-image: url("./assets/avatar-small.png");
+    background-repeat: no-repeat;
+    background-position: 4% center;
+    padding-left: 40px;
+}
+
+.user-password-pic {
+    background-image: url("./assets/lock-blue.png");
+    background-repeat: no-repeat;
+    background-position: 4% center;
+    padding-left: 40px;
+}
+
+.user-main h2 {
+    font-family: Inter Regular;
+    font-size: 12px;
+    color: #4197e7;
+}
+
+.user-footer h2 {
+    font-family: Inter Medium;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.user-footer h2 span {
+    color: #0057ff;
+    font-size: Inter medium;
+}
+.orders-footer-user {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 30px;
+}
+
+.btn-login-user {
+    width: 307px;
+    height: 35px;
+    background-color: #4197e7;
+    font-family: Inter Bold;
+    font-size: 15px;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+.btn-appointment-arrow {
+    position: absolute; /* Добавлено */
+    top: 10; /* Добавлено */
+    bottom: 0;
+    right: 5px; /* Добавлено */
+    transform: translateY(-50%); /* Добавлено */
+}
+
+.btn-appointment {
+    width: 206px;
+    height: 63px;
+    border: 2px solid #05ff5a;
+    border-radius: 15px;
+    font-size: 24px;
+    color: #aaa4a4;
+    margin: 10px 0;
+}
+
+.btn-appointment.unlocked {
+    color: #000000;
+}
+
+.btn-return-cart {
+    width: 140px;
+    height: 33px;
+    background-color: #ef7676;
+    color: #ffffff;
+    border-radius: 10px;
+    font-family: Inter Medium;
+    font-size: 14px;
+}
+
+.btn-order-user {
+    width: 151px;
+    height: 43px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.btn-order-full {
+    border-radius: 5px;
+    font-family: Inter Regular;
+    font-size: 14px;
+    height: 29px;
+}
+
+.btn-order-full.confirmed {
+    background: #5ff29a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-order-full.cancel {
+    min-width: 136px;
+    background: #f56464;
+}
+
+.btn-order-user-exit {
+    width: 151px;
+    height: 43px;
+    border: 1px solid #ff0000;
+    border-radius: 10px;
+}
+
+.btn-vk {
+    width: 167px;
+    height: 47px;
+    /* font-family: Poppins SemiBold; */
+    font-size: 14px;
+    border: 1px solid #e0e2e9;
+    border-radius: 8px;
+    font-weight: bolder;
+    color: #171725;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 20px;
+    margin-bottom: 60px;
+    margin-top: 10px;
+}
+
+.btn-go {
+    width: 165px;
+    height: 52px;
+    font-family: Inter Medium;
+    font-size: 13px;
+    background: #3a4eff;
+    border-radius: 15px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 10px;
+}
+
+.btn-more-user {
+    display: flex;
+    align-items: center;
+    border: 1px solid #2788e2;
+    height: 28px;
+    border-radius: 5px;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.btn-eye-user {
+    position: absolute; /* Устанавливаем абсолютное позиционирование для кнопки */
+    top: 50%; /* Располагаем кнопку по вертикали по центру */
+    right: 0; /* Располагаем кнопку в крайней правой части родительского элемента */
+    transform: translateY(-50%); /* Корректируем положение кнопки по вертикали */
+    background-repeat: no-repeat; /* Запрещаем повторять изображение фона */
+    background-position: center; /* Располагаем изображение фона по центру кнопки */
+    border: none; /* Убираем границу кнопки */
+    cursor: pointer; /* Устанавливаем курсор в виде указателя */
+    background-color: transparent; /* Устанавливаем прозрачный фон кнопки */
+    padding-right: 10px;
+    margin-top: 5px;
+}
+
 .btn-eye {
     position: absolute;
     top: 0;
@@ -512,6 +1166,11 @@ h1 {
     background-color: #d9d9d9;
 }
 
+.btn-cross-cart {
+    background-color: transparent;
+    padding: 0; /* убираем внутренние отступы у кнопки */
+}
+
 .post-field {
     width: 226px;
     height: 28px;
@@ -527,6 +1186,10 @@ h1 {
     padding-left: 50px;
 }
 
+.organistation-full-name {
+    padding-left: 10px;
+}
+
 .posts-count-container {
     position: relative;
 }
@@ -536,7 +1199,6 @@ h1 {
     background-image: url("/src/assets/post.png");
     background-repeat: no-repeat;
     background-position: 4% center;
-    text-align: center;
 }
 
 .btn-arrow {
@@ -553,16 +1215,17 @@ h1 {
     background-color: transparent;
 }
 
-.field:first-child {
-    padding-left: 10px;
-}
-
 .container-footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
     gap: 100px;
+}
+
+.container > h3 {
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #076289;
 }
 
 .sign-up-button {
@@ -591,13 +1254,7 @@ h1 {
     background-color: #a1c1f0;
 }
 
-button {
-    border: 0px;
-    cursor: pointer;
-    background-color: white;
-}
-
 .footer {
-    margin-top: 250px;
+    margin-top: 200px;
 }
 </style>
