@@ -13,14 +13,14 @@
     <header class="info-container">
         <div class="avatar-container">
             <div class="avatar-picture"></div>
-            <button class="btn-avatar">Добавить аватар</button>
+            <button type="button" class="btn-avatar">Добавить аватар</button>
         </div>
         <div class="contact-info">
             <h2 class="contact-info-title">ООО автомойка</h2>
             <h2 class="contact-info-title">г. Екатеринбург ул. Пушкина, 19</h2>
             <h2 class="contact-info-title">+7 983 345 09 43</h2>
             <h2 class="contact-info-title">carwash96@email.com</h2>
-            <button class="btn-contact-info">Изменить/ Добавить информацию</button>
+            <button type="button" class="btn-contact-info">Изменить/ Добавить информацию</button>
         </div>
         <button class="btn-exit">Выйти</button>
     </header>
