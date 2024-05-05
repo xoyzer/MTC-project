@@ -644,19 +644,32 @@ h4 {
     justify-content: center;
 }
 
+.appointment-form {
+    position: relative;
+}
+
 #modal-appointment {
     width: 320px;
     margin: 0 auto;
 }
 
-.overlay.show {
-    display: flex;
+.overlay-date.show {
+    /* display: flex; */
+}
+.overlay-time.show {
+    /* display: flex; */
 }
 
-.overlay {
+.overlay-date,
+.overlay-time {
     display: none;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 999;
     /* background-color: rgba(0, 0, 0, 0.3); */
 }
@@ -669,19 +682,25 @@ h4 {
     font-size: 14px;
 }
 
+.overlay-success.show {
+    display: flex;
+}
+
 .success-block {
     display: none;
     width: 282px;
     height: 259px;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 999;
-    background: #0afd05;
+    background: #0cff50;
+    margin: 0 auto;
+    border-radius: 15px;
 }
 
 .selected {
