@@ -1,15 +1,32 @@
 <template>
-    <form>
+    <form @submit.prevent="submitHandler">
         <main class="user-main">
             <h1 class="login-to-application-header">Вход в приложение</h1>
             <label class="user-container user-login">
                 <h2>Введите логин</h2>
-                <input class="user-input user-login-pic" type="text" placeholder="User Name" required />
+                <input
+                    class="user-input user-login-pic"
+                    type="text"
+                    minlength="4"
+                    maxlength="15"
+                    placeholder="User Name"
+                    required
+                    v-model="login"
+                />
             </label>
             <label class="user-container user-password">
                 <h2>Введите пароль</h2>
-                <input class="user-input user-password-pic" type="password" placeholder="Password" required />
-                <button type="button" class="btn-eye-user">
+                <input
+                    class="user-input user-password-pic"
+                    type="password"
+                    minlength="6"
+                    maxlength="20"
+                    required
+                    placeholder="Password"
+                    v-model="password"
+                    ref="passwordInput"
+                />
+                <button type="button" class="btn-eye-user" @click="togglePasswordVisibility">
                     <img src="../../assets/eye-open.png" alt="eye" />
                 </button>
                 <a href=""> <h3 class="">Забыли пароль?</h3></a>
@@ -31,3 +48,27 @@
         </footer>
     </form>
 </template>
+
+<script>
+export default {
+    data: () => ({
+        login: "",
+        password: "",
+    }),
+
+    methods: {
+        togglePasswordVisibility() {
+            const passwordInput = this.$refs.passwordInput;
+            passwordInput.type === "password" ? (passwordInput.type = "text") : (passwordInput.type = "password");
+        },
+        submitHandler() {
+            const formData = {
+                email: this.login,
+                password: this.password,
+            };
+            console.log(formData);
+            this.$router.push("/map");
+        },
+    },
+};
+</script>

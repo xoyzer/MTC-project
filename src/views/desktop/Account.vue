@@ -20,9 +20,13 @@
             <h2 class="contact-info-title">г. Екатеринбург ул. Пушкина, 19</h2>
             <h2 class="contact-info-title">+7 983 345 09 43</h2>
             <h2 class="contact-info-title">carwash96@email.com</h2>
-            <button type="button" class="btn-contact-info">Изменить/ Добавить информацию</button>
+            <router-link to="/info">
+                <button type="button" class="btn-contact-info">Изменить/ Добавить информацию</button>
+            </router-link>
         </div>
-        <button class="btn-exit">Выйти</button>
+        <router-link to="/register">
+            <button class="btn-exit">Выйти</button>
+        </router-link>
     </header>
     <main class="main">
         <h1 class="post-header-container">Активные посты</h1>
@@ -42,7 +46,7 @@
         <div class="order">
             <div class="orders-container">
                 <div class="order-row">
-                    <img src="../assets/phone-call-01.png" width="24px" height="24px" alt="" />
+                    <img src="../../assets/phone-call-01.png" width="24px" height="24px" alt="phone" />
                     <h4 class="order-info">Алексей A000AA96 Lamborghini Aventador, 2018</h4>
                     <h4 class="order-time">17.03.2024 16:00</h4>
                     <button class="btn-accept">Подтвердить</button>
@@ -50,12 +54,12 @@
                 </div>
                 <div class="order-row">
                     <p>Выбранные услуги:</p>
-                    <h4 class="selected-service">Мойка</h4>
+                    <h4 class="selected-service-account">Мойка</h4>
                 </div>
             </div>
             <div class="orders-container">
                 <div class="order-row">
-                    <img src="../assets/phone-call-01.png" width="24px" height="24px" alt="" />
+                    <img src="../../assets/phone-call-01.png" width="24px" height="24px" alt="" />
                     <h4 class="order-info">Максим Р137ЛК96 Suburu Forester, 2019</h4>
                     <h4 class="order-time">17.03.2024 15:00</h4>
                     <button class="btn-waiting">Ожидание</button>
@@ -75,12 +79,13 @@
                 <ul>
                     <li>
                         <a href="#"
-                            >По дате <img src="../assets/chevron-down.png" width="24px" height="24px" alt=""
+                            >По дате <img src="../../assets/chevron-down.png" width="24px" height="24px" alt="chevron"
                         /></a>
                     </li>
                     <li>
                         <a href="#"
-                            >По услугам <img src="../assets/chevron-down.png" width="24px" height="24px" alt=""
+                            >По услугам
+                            <img src="../../assets/chevron-down.png" width="24px" height="24px" alt="chevron"
                         /></a>
                     </li>
                 </ul>

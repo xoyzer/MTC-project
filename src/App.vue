@@ -175,13 +175,23 @@ h4 {
     gap: 30px;
 }
 
+/* .post-container.show {
+    display: flex;
+} */
+
 .post-container {
+    display: flex;
     width: 668px;
     height: 367px;
     border: 1px solid black;
-    display: flex;
     gap: 100px;
     overflow-x: hidden;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 button {
@@ -216,7 +226,7 @@ button {
     background-image: url("/src/assets/watch.png");
     background-repeat: no-repeat;
     background-position: 4% center;
-    padding-left: 50px;
+    padding: 0 10px 0 50px;
 }
 
 .added-service {
@@ -469,7 +479,7 @@ h4 {
     font-size: 32px;
 }
 
-.selected-service {
+.selected-service-account {
     background-color: #d9d9d9;
     font-size: 24px;
     padding: 10px 10px;
@@ -604,7 +614,7 @@ h4 {
     padding: 0 30px 0 10px;
 }
 
-.highlighted-appointment-info::placeholder {
+.input-appointment-info-container.highlighted::placeholder {
     color: #000000;
 }
 
@@ -616,26 +626,25 @@ h4 {
     margin-bottom: 5px;
 }
 
-.appointment-date-input {
+.appointment-input {
     width: 309px;
     height: 35px;
     border: 2px solid #2788e2;
     border-radius: 15px;
-    background-image: url("./assets/calendar.png");
     background-repeat: no-repeat;
     background-position: 4% center;
     padding: 0 40px;
+    font-family: Inter Medium;
+    font-size: 14px;
+    color: #000000;
 }
 
-.appointment-time-input {
-    width: 309px;
-    height: 35px;
-    border: 2px solid #2788e2;
-    border-radius: 15px;
+.appointment-input.date {
+    background-image: url("./assets/calendar.png");
+}
+
+.appointment-input.time {
     background-image: url("./assets/watch (2).png");
-    background-repeat: no-repeat;
-    background-position: 4% center;
-    padding: 0 40px;
 }
 
 .appointment-footer {
@@ -654,10 +663,10 @@ h4 {
 }
 
 .overlay-date.show {
-    /* display: flex; */
+    display: flex;
 }
 .overlay-time.show {
-    /* display: flex; */
+    display: flex;
 }
 
 .overlay-date,
@@ -665,24 +674,18 @@ h4 {
     display: none;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 8px;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    /* background-color: rgba(0, 0, 0, 0.3); */
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-.btn-modal-appointment {
-    width: 320px;
-    height: 32px;
-    text-align: center;
-    font-family: Inter Medium;
-    font-size: 14px;
-}
-
-.overlay-success.show {
+.success-block.show {
     display: flex;
 }
 
@@ -703,7 +706,23 @@ h4 {
     border-radius: 15px;
 }
 
-.selected {
+.btn-modal-appointment.selected {
+    /* background: #b0d6e5; */
+    color: #000000;
+}
+
+.btn-modal-appointment {
+    width: 320px;
+    height: 32px;
+    text-align: center;
+    font-family: Inter Medium;
+    font-size: 14px;
+    background: white;
+    color: #19181a;
+    border: 1px solid #2788e2;
+}
+
+.btn-modal-appointment:active {
     background: #b0d6e5;
 }
 
@@ -731,19 +750,12 @@ h4 {
 }
 
 .cart-main-column.goods.show {
-    /* display: flex; */
+    display: flex;
 }
 
 .cart-main-column h3 {
     font-family: Inter Medium;
     font-size: 13px;
-}
-
-.cart-main-column p {
-    color: #1843dd;
-    font-family: Inter Medium;
-    font-size: 13px;
-    margin: 0;
 }
 
 .cart-main-column h2 {
@@ -765,6 +777,11 @@ h4 {
 
 .cart-main-column a {
     /* display: none; */
+
+    color: #1843dd;
+    font-family: Inter Medium;
+    font-size: 13px;
+    margin: 0;
 }
 
 .cart-main-column.goods {
@@ -780,11 +797,29 @@ h4 {
     font-size: 13px;
 }
 
-.good-container {
+.service-item {
+    border-bottom: 1px solid #e4e6ec;
     display: flex;
     justify-content: space-between;
-    margin: 0 10px;
+}
+
+/* .good-container li {
     border-bottom: 1px solid #e4e6ec;
+    display: flex;
+    justify-content: space-between;
+} */
+
+.good-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    gap: 10px;
+}
+
+.btn-swipe-cart {
+    margin: 40px 0 0 0;
+    padding: 0;
+    width: 25px;
 }
 
 .arrow-right-goods {
@@ -833,7 +868,7 @@ h4 {
     align-items: center;
     font-size: 14px;
     padding: 0 0 0 10px;
-    gap: 20px;
+    gap: 30px;
 }
 
 .user-orders-header h1 {
@@ -841,7 +876,7 @@ h4 {
 }
 
 .order-more.show {
-    /* display: block; */
+    display: block;
 }
 
 .order-more {
@@ -850,37 +885,64 @@ h4 {
     height: 231px;
     border: 1px solid #0c2c7e;
     border-radius: 10px;
-    padding: 0 0 0 20px;
+    padding: 0 0 20px 20px;
+    overflow-x: hidden;
+}
+.ul-services {
+    padding-left: 35px;
 }
 
-.order-more p {
+.ul-car-info {
+    padding-left: 25px;
+}
+
+.order-more ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     font-size: 14px;
 }
 
 .order-more li {
     list-style-type: disc;
+    font-size: 14px;
 }
 
 .order-button-container {
     display: flex;
     gap: 20px;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
-.selected-cart-sevice {
+.selected-cart-service {
     display: flex;
     background-color: #d9d9d9;
     align-items: center;
     border-radius: 5px; /* закругление углов рамки */
-    padding: 5px; /* отступ внутри рамки */
-    width: fit-content; /* ширина рамки будет подстраиваться под содержимое */
-    padding: 5px 15px 5px 0;
+    /* padding: 5px; отступ внутри рамки */
+    padding: 5px 5px 7px 0;
+}
+
+.selected-cart-service button {
+    padding: 0;
+}
+
+.selected-service {
+    display: flex;
+    align-items: center;
+    width: 114px;
+}
+
+.selected-service button {
+    width: 33px;
+    height: 27px;
 }
 
 .selected-cart-sevice h3 {
     font-family: Inter Medium;
     font-size: 13px;
     margin: 0;
+    background-color: #d9d9d9;
 }
 
 .selected-cart-sevice img {
@@ -1079,7 +1141,8 @@ h4 {
     color: #ffffff;
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    gap: 15px;
     padding-left: 10px;
 }
 
@@ -1265,7 +1328,15 @@ h4 {
     border-radius: 20px;
 }
 
-.btn-continue {
+.btn-continue-info {
+    width: 468px;
+    height: 72px;
+    margin-top: 20px;
+    font-size: 32px;
+    background-color: #a1c1f0;
+}
+
+.btn-back-info {
     width: 468px;
     height: 72px;
     margin-top: 20px;

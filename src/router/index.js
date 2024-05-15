@@ -1,53 +1,50 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Register from "@/views/Register.vue";
-import Info from "@/views/Info.vue";
-import Account from "@/views/Account.vue";
-import UserLogin from "@/views/mobile/UserLogin.vue";
-import Map from "@/views/mobile/Map.vue";
-import Cart from "@/views/mobile/Cart.vue";
-import Appointment from "@/views/mobile/Appointment.vue";
-import UserOrders from "@/views/mobile/UserOrders.vue";
 
 const routes = [
     {
         path: "/register",
         name: "register",
-        component: Register,
+        component: () => import("@/views/desktop/Register.vue"),
     },
     {
         path: "/info",
         name: "info",
-        component: Info,
+        component: () => import("@/views/desktop/Info.vue"),
     },
     {
         path: "/account",
         name: "account",
-        component: Account,
+        component: () => import("@/views/desktop/Account.vue"),
     },
     {
         path: "/login",
         name: "login",
-        component: UserLogin,
+        component: () => import("@/views/mobile/UserLogin.vue"),
     },
     {
         path: "/map",
         name: "map",
-        component: Map,
+        component: () => import("@/views/mobile/Map.vue"),
     },
     {
         path: "/cart",
         name: "cart",
-        component: Cart,
+        component: () => import("@/views/mobile/Cart.vue"),
     },
     {
         path: "/appointment",
         name: "appointment",
-        component: Appointment,
+        component: () => import("@/views/mobile/Appointment.vue"),
     },
     {
         path: "/orders",
         name: "orders",
-        component: UserOrders,
+        component: () => import("@/views/mobile/UserOrders.vue"),
+    },
+    {
+        path: "/test",
+        name: "test",
+        component: () => import("@/views/desktop/Test.vue"),
     },
 ];
 
