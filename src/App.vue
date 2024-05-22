@@ -307,11 +307,13 @@ button {
 
 .active-post-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 200px;
     gap: 50px;
     word-wrap: break-word;
     white-space: pre-wrap;
+    padding: 0 50px;
 }
 
 .post-header-container {
@@ -327,8 +329,9 @@ button {
 }
 
 .active-post {
-    width: 420px;
-    height: 565px;
+    flex: 1 1 1 1;
+    min-width: 420px;
+    min-height: 565px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -342,7 +345,6 @@ button {
     font-size: 20px;
     padding: 10px;
     width: 204px;
-    height: 45px;
     margin: 0;
     margin-bottom: 30px;
     word-wrap: break-word;
@@ -351,7 +353,7 @@ button {
 
 .orders-container {
     width: 1393px;
-    height: 232px;
+    min-height: 232px;
     border: 1px solid black;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -375,6 +377,7 @@ button {
     width: 1393px;
     word-wrap: break-word;
     white-space: pre-wrap;
+    margin-bottom: 20px;
 }
 
 .order-row > p {
@@ -413,6 +416,8 @@ h4 {
 .order-info {
     font-size: 40px;
     margin: 0;
+    width: 618px;
+    text-align: justify;
 }
 
 .order-row > img {
@@ -426,7 +431,6 @@ h4 {
 
 .orders-history {
     width: 794px;
-    height: 167px;
     border: 1px solid black;
     font-size: 24px;
     display: flex;
@@ -438,8 +442,9 @@ h4 {
 
 .order-history-column-info {
     margin-left: 20px;
-    margin-right: 20px;
+    padding-right: 20px;
     margin-top: 0;
+    padding-bottom: 10px;
 }
 
 .order-history-column-info > p {
@@ -945,9 +950,6 @@ h4 {
     background-color: #d9d9d9;
 }
 
-.selected-cart-sevice img {
-}
-
 .user-main {
     display: flex;
     flex-direction: column;
@@ -966,10 +968,6 @@ h4 {
     margin-top: 10px;
 }
 
-.user-password {
-    position: relative;
-}
-
 .user-footer {
     display: flex;
     flex-direction: column;
@@ -977,8 +975,16 @@ h4 {
     text-align: center;
 }
 
+.user-footer.register {
+    align-items: normal;
+}
+
 .user-container {
     position: relative;
+}
+
+.user-container h2 {
+    margin: 0 0 15px 20px;
 }
 
 .or-line {
@@ -1001,18 +1007,28 @@ h4 {
     display: flex;
 }
 
-.user-login-pic {
-    background-image: url("./assets/avatar-small.png");
+.user-input::placeholder {
+    color: #110e0e6c;
+    font-family: Inter Regular;
+    font-size: 15px;
+}
+
+.user-pic {
     background-repeat: no-repeat;
     background-position: 4% center;
     padding-left: 40px;
 }
 
-.user-password-pic {
+.user-pic.phone {
+    background-image: url("./assets/phone-user.png");
+}
+
+.user-pic.login {
+    background-image: url("./assets/avatar-small.png");
+}
+
+.user-pic.password {
     background-image: url("./assets/lock-blue.png");
-    background-repeat: no-repeat;
-    background-position: 4% center;
-    padding-left: 40px;
 }
 
 .user-main h2 {
@@ -1031,6 +1047,23 @@ h4 {
     color: #0057ff;
     font-size: Inter medium;
 }
+
+.user-footer.register {
+    margin-top: 40px;
+}
+
+.user-footer.register h2 {
+    margin-top: 25px;
+    margin-left: 170px;
+    font-size: 15px;
+    letter-spacing: normal;
+}
+
+.user-footer.register a {
+    font-family: Inter Bold;
+    color: #4197e7;
+}
+
 .orders-footer-user {
     display: flex;
     justify-content: center;
@@ -1038,7 +1071,7 @@ h4 {
     gap: 30px;
 }
 
-.btn-login-user {
+.btn-submit-user {
     width: 307px;
     height: 35px;
     background-color: #4197e7;
@@ -1046,6 +1079,10 @@ h4 {
     font-size: 15px;
     color: #ffffff;
     border-radius: 15px;
+}
+
+.btn-submit-user.register {
+    margin: 0 auto;
 }
 
 .btn-appointment-arrow {
@@ -1158,16 +1195,25 @@ h4 {
 
 .btn-eye-user {
     position: absolute; /* Устанавливаем абсолютное позиционирование для кнопки */
-    top: 50%; /* Располагаем кнопку по вертикали по центру */
-    right: 0; /* Располагаем кнопку в крайней правой части родительского элемента */
-    transform: translateY(-50%); /* Корректируем положение кнопки по вертикали */
-    background-repeat: no-repeat; /* Запрещаем повторять изображение фона */
-    background-position: center; /* Располагаем изображение фона по центру кнопки */
-    border: none; /* Убираем границу кнопки */
-    cursor: pointer; /* Устанавливаем курсор в виде указателя */
-    background-color: transparent; /* Устанавливаем прозрачный фон кнопки */
-    padding-right: 10px;
-    margin-top: 5px;
+    top: 60%;
+    right: 5px;
+}
+
+.btn-eye-user.login {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-eye-user:active {
+    background: #b0d6e5;
+}
+
+button:active {
+    background: #b0d6e5;
+}
+
+a:active {
+    background: #b0d6e5;
 }
 
 .btn-eye {

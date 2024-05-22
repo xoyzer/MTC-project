@@ -2,7 +2,7 @@
     <form @submit.prevent="submitHandler">
         <header class="cart-header">
             <h1>Корзина</h1>
-            <router-link to="/map">
+            <router-link to="/userLogin">
                 <button class="btn-return-cart">Вернуться</button>
             </router-link>
         </header>

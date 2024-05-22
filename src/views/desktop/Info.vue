@@ -1,3 +1,4 @@
+/info:
 <template>
     <form class="both-bars" @submit.prevent="submitHandler">
         <div class="left-side-bar">
@@ -23,6 +24,9 @@
                             pattern="[+0-9]*"
                             v-model="phone"
                             required
+                            @focus="handleFocus"
+                            @blur="handleBlur"
+                            maxlength="12"
                         />
                     </label>
                     <label class="label posts-count-container">
@@ -30,7 +34,10 @@
                             class="posts-count field"
                             type="number"
                             placeholder="Количество постов"
-                            v-model="postCount"
+                            :value="displayedPostCount"
+                            @input="updatePostCount"
+                            @focus="handlePostCountFocus"
+                            @blur="handlePostCountBlur"
                             required
                         />
                         <button type="button" class="btn-arrow"></button>
@@ -50,34 +57,33 @@
             </div>
         </div>
         <div class="right-side-bar">
-            <div class="post-container" v-for="index in postCountAsNumber" :key="index">
+            <div class="post-container" v-for="(post, index) in posts" :key="index">
                 <div class="post-container-column">
                     <label class="label" for="">
-                        <h2 class="post-count">Пост {{ index }}</h2>
+                        <h2 class="post-count">Пост {{ index + 1 }}</h2>
                         <input
                             type="number"
                             class="post-field"
-                            placeholder="количество сотрудников"
-                            v-model="employeesNumber"
-                            required
+                            placeholder="Количество сотрудников"
+                            v-model="post.employeesNumber"
                         />
                     </label>
                     <label class="label service-name">
                         <h4 class="post-title">Название услуги</h4>
-                        <input class="post-field" required v-model="serviceName" />
+                        <input class="post-field" v-model="post.serviceName" />
                     </label>
                     <label class="label service-duration">
                         <h4 class="post-title">Длительность услуги</h4>
-                        <input class="post-field" required v-model="serviceDuration" />
+                        <input class="post-field" v-model="post.serviceDuration" />
                     </label>
                     <button type="button" class="post-btn" @click="addService(index)">+ Добавить</button>
                 </div>
                 <div class="post-container-column">
                     <div class="service-container">
                         <h4>Услуги:</h4>
-                        <div class="added-service" v-for="(post, postIndex) in posts[index]" :key="postIndex">
+                        <div class="added-service" v-for="(service, postIndex) in post.services" :key="postIndex">
                             <button class="btn-cross" @click="removeService(index, postIndex)"></button>
-                            <h4 class="added-service-info">{{ post.name }}: {{ post.duration }}</h4>
+                            <h4 class="added-service-info">{{ service.name }}: {{ service.duration }}</h4>
                         </div>
                     </div>
                 </div>
@@ -87,7 +93,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
     data() {
         return {
@@ -97,48 +102,90 @@ export default {
             address: "",
             phone: "",
             schedule: "",
-            serviceName: "",
-            serviceDuration: "",
-            employeesNumber: "",
         };
     },
     computed: {
-        postCountAsNumber() {
-            const count = parseInt(this.postCount);
-            return isNaN(count) ? 0 : count;
+        displayedPostCount() {
+            return this.postCount === null ? "" : this.postCount;
+        },
+    },
+    watch: {
+        postCount(newCount) {
+            this.updatePosts(newCount);
         },
     },
     methods: {
+        updatePostCount(event) {
+            const value = event.target.value;
+            this.postCount = value === "" ? null : Number(value);
+        },
+        handlePostCountFocus() {
+            if (this.postCount === null) {
+                this.postCount = 0;
+            }
+        },
+        handlePostCountBlur() {
+            if (this.postCount === 0) {
+                this.postCount = null;
+            }
+        },
+        updatePosts(newCount) {
+            const currentPosts = this.posts;
+            const newPosts = [];
+            for (let i = 0; i < newCount; i++) {
+                if (currentPosts[i]) {
+                    newPosts.push(currentPosts[i]);
+                } else {
+                    newPosts.push({
+                        employeesNumber: "",
+                        serviceName: "",
+                        serviceDuration: "",
+                        services: [],
+                    });
+                }
+            }
+            this.posts = newPosts;
+            this.saveServicesToStorage();
+        },
         addService(index) {
-            const nameInput = document.querySelector(`.post-container:nth-child(${index}) .service-name input`);
-            const durationInput = document.querySelector(`.post-container:nth-child(${index}) .service-duration input`);
-
-            if (nameInput.value.trim() === "" || durationInput.value.trim() === "") {
+            const post = this.posts[index];
+            if (post.serviceName.trim() === "" || post.serviceDuration.trim() === "" || post.employeesNumber === "") {
                 alert("Пожалуйста, заполните все обязательные поля");
                 return;
             }
 
-            const name = nameInput.value;
-            const duration = durationInput.value;
-            if (!this.posts[index]) {
-                this.posts[index] = [];
+            post.services.push({
+                name: post.serviceName,
+                duration: post.serviceDuration,
+                employeesNumber: post.employeesNumber,
+            });
+
+            post.serviceName = "";
+            post.serviceDuration = "";
+            post.employeesNumber = "";
+
+            this.saveServicesToStorage();
+        },
+        handleFocus() {
+            if (this.phone === "") {
+                this.phone = "+7";
             }
-
-            this.posts[index].push({ name, duration });
-
-            nameInput.value = "";
-            durationInput.value = "";
+        },
+        handleBlur() {
+            if (this.phone === "+7") {
+                this.phone = "";
+            }
         },
         formatTime(value) {
             let formattedValue = value.replace(/[^0-9:-]/g, "");
             formattedValue = formattedValue.replace(/^(\d{2})(\d{2})/, "$1:$2-");
             formattedValue = formattedValue.replace(/(\d{2})(?=\d{2})/g, "$1:");
             formattedValue = formattedValue.slice(0, 11);
-            this.schedule = formattedValue; // обновляем значение графика работы
+            this.schedule = formattedValue;
         },
-
-        removeService(index, postIndex) {
-            this.posts[index].splice(postIndex, 1);
+        removeService(postIndex, serviceIndex) {
+            this.posts[postIndex].services.splice(serviceIndex, 1);
+            this.saveServicesToStorage();
         },
         submitHandler() {
             const formData = {
@@ -147,11 +194,37 @@ export default {
                 phone: this.phone,
                 schedule: this.schedule,
                 posts: JSON.parse(JSON.stringify(this.posts)),
-                employeesNumber: this.employeesNumber,
             };
-            console.log(formData);
+
+            this.$store.commit("SET_CONTACT_INFO_ADMIN", formData);
+            this.$store.commit("SET_POST_COUNT", this.postCount);
+            localStorage.setItem("contactInfo", JSON.stringify(formData));
+            localStorage.setItem("postCount", this.postCount);
             this.$router.push("/account");
         },
+        saveServicesToStorage() {
+            localStorage.setItem("services", JSON.stringify(this.posts));
+        },
+        loadServicesFromStorage() {
+            const savedServices = localStorage.getItem("services");
+            if (savedServices) {
+                this.posts = JSON.parse(savedServices);
+            }
+        },
+    },
+    created() {
+        const savedContactInfo = localStorage.getItem("contactInfo");
+        if (savedContactInfo) {
+            const contactInfo = JSON.parse(savedContactInfo);
+            this.organisationFullName = contactInfo.organisationFullName || "";
+            this.address = contactInfo.address || "";
+            this.phone = contactInfo.phone || "";
+            this.schedule = contactInfo.schedule || "";
+            this.posts = contactInfo.posts || [];
+            this.postCount = contactInfo.posts ? contactInfo.posts.length : null;
+        }
+        this.updatePosts(this.postCount);
+        this.loadServicesFromStorage();
     },
 };
 </script>

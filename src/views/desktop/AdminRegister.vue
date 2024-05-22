@@ -48,30 +48,32 @@
 </template>
 
 <script>
-// import { email } from "vuelidate/lib/validators";
 export default {
-    name: "login",
-    data: () => ({
-        email: "",
-        password: "",
-        passwordRepeat: "",
-        organisationName: "",
-    }),
-
+    name: "register",
+    data() {
+        return {
+            email: "",
+            password: "",
+            passwordRepeat: "",
+            organisationName: "",
+        };
+    },
     watch: {
         passwordRepeat: "checkPasswordsEquality",
         password: "checkPasswordsEquality",
     },
-
     methods: {
         togglePasswordVisibility() {
             const passwordInput = this.$refs.passwordInput;
+            const passwordRepeatInput = this.$refs.passwordRepeatE1;
             passwordInput.type === "password" ? (passwordInput.type = "text") : (passwordInput.type = "password");
+            passwordRepeatInput.type === "password"
+                ? (passwordRepeatInput.type = "text")
+                : (passwordRepeatInput.type = "password");
         },
         checkPasswordsEquality() {
             const { password, passwordRepeat } = this;
             const { passwordRepeatE1 } = this.$refs;
-
             password !== passwordRepeat
                 ? passwordRepeatE1.setCustomValidity("Пароли должны совпадать")
                 : passwordRepeatE1.setCustomValidity("");
@@ -83,10 +85,10 @@ export default {
                 organisationName: this.organisationName,
             };
             console.log(formData);
+            this.$store.commit("SET_ADMIN_EMAIL", this.email);
+            localStorage.setItem("email", this.email);
             this.$router.push("/info");
         },
     },
 };
 </script>
-
-<style></style>

@@ -44,7 +44,7 @@
         </div>
     </main>
     <footer class="orders-footer-user">
-        <button type="button" class="btn-order-user more" @click="orderMore">Заказать ещё</button>
+        <button type="button" class="btn-order-user more" @click="orderMore">Изменить заказ</button>
         <button type="button" class="btn-order-user-exit" @click="logOut">Выйти</button>
     </footer>
 </template>
