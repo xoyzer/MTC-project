@@ -15,6 +15,28 @@
                     @blur="handleBlur"
                 />
             </label>
+            <label class="user-container user-name">
+                <h2>Введите имя</h2>
+                <input class="user-input user-pic login" placeholder="First Name" required v-model="f_name" />
+            </label>
+            <label class="user-container user-name">
+                <h2>Введите фамилию</h2>
+                <input class="user-input user-pic login" placeholder="Last Name" required v-model="l_name" />
+            </label>
+            <label class="user-container user-name">
+                <h2>Введите дату рождения</h2>
+                <input
+                    class="user-input user-pic login"
+                    placeholder="Birthday"
+                    type="date"
+                    required
+                    v-model="birthday"
+                />
+            </label>
+            <label class="user-container user-name">
+                <h2>Введите почту</h2>
+                <input class="user-input user-pic login" placeholder="Email" type="email" required v-model="email" />
+            </label>
             <label class="user-container user-login">
                 <h2>Введите логин</h2>
                 <input
@@ -60,7 +82,7 @@
         <footer class="user-footer register">
             <button class="btn-submit-user register">Зарегистрироваться</button>
             <h2>
-                <router-link to="/userLogin"> Уже есть аккаунт? </router-link>
+                <router-link to="/clientsLogin"> Уже есть аккаунт? </router-link>
             </h2>
         </footer>
     </form>
@@ -71,6 +93,10 @@ export default {
     data() {
         return {
             phone: "",
+            f_name: "",
+            l_name: "",
+            birthday: "",
+            email: "",
             login: "",
             password: "",
             passwordRepeat: "",
@@ -102,15 +128,28 @@ export default {
                 this.phone = "";
             }
         },
-        submitHandler() {
-            const formData = {
-                phone: this.phone,
+        async submitHandler() {
+            if (this.password !== this.passwordRepeat) {
+                alert("Пароли не совпадают");
+                return;
+            }
+
+            const userData = {
                 login: this.login,
                 password: this.password,
-                passwordRepeat: this.passwordRepeat,
+                l_name: this.l_name,
+                f_name: this.f_name,
+                email: this.email,
+                phone: this.phone,
+                birthday: this.birthday,
             };
-            console.log(formData);
-            this.$router.push("/cart");
+
+            try {
+                await this.$store.dispatch("registerUser", userData);
+                this.$router.push("/cart");
+            } catch (error) {
+                console.error("Ошибка регистрации:", error);
+            }
         },
     },
 };

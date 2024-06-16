@@ -100,6 +100,12 @@ a {
     position: relative;
 }
 
+.adminReg.tick {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+}
+
 .password {
     background-image: url("/src/assets/lock-01.png");
     background-repeat: no-repeat, no-repeat;

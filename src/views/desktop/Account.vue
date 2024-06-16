@@ -18,9 +18,9 @@
                 <button type="button" class="btn-avatar">Добавить аватар</button>
             </div>
             <div class="contact-info">
-                <h2 class="contact-info-title">{{ contactInfo.organisationFullName }}</h2>
-                <h2 class="contact-info-title">{{ contactInfo.address }}</h2>
-                <h2 class="contact-info-title">{{ contactInfo.phone }}</h2>
+                <h2 class="contact-info-title">{{ contactInfoAdmin.orgName }}</h2>
+                <h2 class="contact-info-title">{{ contactInfoAdmin.address }}</h2>
+                <h2 class="contact-info-title">{{ contactInfoAdmin.phone }}</h2>
                 <h2 class="contact-info-title">{{ email }}</h2>
                 <button type="button" class="btn-contact-info" @click="changeOrAddInfo">
                     Изменить/ Добавить информацию
@@ -116,18 +116,7 @@
 export default {
     data() {
         return {
-            activeOrders: [
-                {
-                    name: "Алексей",
-                    car: "A000AA96 Lamborghini Aventador, 2018",
-                    time: "17.03.2024 16:00",
-                    services: ["Мойка", "Химчистка"],
-                    status: "pending",
-                    isConfirmed: false,
-                    statusText: "Ожидание подтверждения",
-                    carInfo: "Lamborghini Aventador, 2018",
-                },
-            ],
+            activeOrders: [],
             orderHistory: [],
             sortKey: "date",
             sortOrder: 1,
@@ -137,19 +126,18 @@ export default {
         email() {
             return this.$store.state.email;
         },
-        contactInfo() {
+        contactInfoAdmin() {
             return this.$store.state.contactInfoAdmin;
         },
         postCount() {
             return this.$store.state.postCount;
         },
         postInfo() {
-            // Если contactInfo.posts не определен, вернуть пустой массив
-            if (!this.contactInfo || !this.contactInfo.posts) {
+            if (!this.contactInfoAdmin || !this.contactInfoAdmin.posts) {
                 return [];
             }
 
-            const posts = Array(this.contactInfo.posts.length)
+            const posts = Array(this.contactInfoAdmin.posts.length)
                 .fill()
                 .map(() => []);
 
@@ -163,6 +151,7 @@ export default {
             return posts;
         },
     },
+
     created() {
         const savedEmail = localStorage.getItem("email");
         if (savedEmail) {
@@ -183,6 +172,10 @@ export default {
         if (savedOrderHistory) {
             this.orderHistory = JSON.parse(savedOrderHistory);
         }
+        const savedPostCount = localStorage.getItem("postCount");
+        if (savedPostCount) {
+            this.$store.commit("SET_POST_COUNT", Number(savedPostCount));
+        }
     },
 
     methods: {
@@ -190,12 +183,8 @@ export default {
             this.$router.push("/info");
         },
         logOut() {
-            localStorage.removeItem("email");
-            localStorage.removeItem("contactInfo");
-            localStorage.removeItem("activeOrders");
-            localStorage.removeItem("orderHistory");
             this.$store.commit("LOGOUT");
-            this.$router.push("/adminRegister");
+            this.$router.push("/adminsRegister");
         },
         confirmOrder(index) {
             this.activeOrders[index].isConfirmed = true;

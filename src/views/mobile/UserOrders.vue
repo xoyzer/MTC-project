@@ -3,7 +3,7 @@
         <h1>Ваши заказы:</h1>
     </header>
     <main class="user-orders-main">
-        <div class="user-order">
+        <div class="user-order" v-if="appointmentInfo">
             <p>Запись: {{ appointmentInfo.selectedDate }} {{ appointmentInfo.selectedTime }}</p>
             <button class="btn-more-user" @click="toggleMoreOverlay">
                 <p>Подробнее</p>
@@ -58,8 +58,17 @@ export default {
         };
     },
     computed: {
-        ...mapState(["selectedServices"]),
-        ...mapState(["appointmentInfo"]),
+        ...mapState(["selectedServices", "appointmentInfo"]),
+    },
+    mounted() {
+        const appointmentInfo = JSON.parse(localStorage.getItem("appointmentInfo"));
+        const selectedServices = JSON.parse(localStorage.getItem("selectedServices"));
+        if (appointmentInfo) {
+            this.$store.commit("SET_APPOINTMENT_INFO", appointmentInfo);
+        }
+        if (selectedServices) {
+            this.$store.commit("SET_SELECTED_SERVICES", selectedServices);
+        }
     },
     methods: {
         ...mapMutations(["RESET_SELECTED_SERVICES", "RESET_APPOINTMENT_INFO"]),
@@ -67,7 +76,7 @@ export default {
             this.$router.push("/cart");
         },
         logOut() {
-            this.$router.push("/login");
+            this.$router.push("/clientsLogin");
         },
         toggleMoreOverlay() {
             const overlay = document.querySelector(".order-more");

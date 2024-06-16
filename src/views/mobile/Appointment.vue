@@ -116,7 +116,6 @@ export default {
             success: false,
         };
     },
-
     computed: {
         ...mapState(["selectedServices"]),
         isFormValid() {
@@ -168,7 +167,6 @@ export default {
                 mark: this.mark,
                 stateNumber: this.stateNumber,
             };
-            console.log(formData);
             this.SET_APPOINTMENT_INFO(formData);
             const successBlock = document.querySelector(".success-block");
             successBlock.classList.add("show");

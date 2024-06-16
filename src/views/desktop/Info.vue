@@ -9,7 +9,7 @@
                         <input
                             class="organistation-full-name field"
                             placeholder="Полное название организации"
-                            v-model="organisationFullName"
+                            v-model="orgName"
                             required
                         />
                     </label>
@@ -46,10 +46,18 @@
                         <input
                             class="schedule field"
                             type="text"
-                            placeholder="График работы"
-                            v-model="schedule"
+                            placeholder="Начало работы (HH:MM)"
+                            v-model="workTimeStart"
                             required
-                            @input="formatTime($event.target.value)"
+                        />
+                    </label>
+                    <label class="label" for="">
+                        <input
+                            class="schedule field"
+                            type="text"
+                            placeholder="Конец работы (HH:MM)"
+                            v-model="workTimeEnd"
+                            required
                         />
                     </label>
                     <button type="submit" class="btn-continue-info" @click="togglePostVisability">Продолжить</button>
@@ -98,10 +106,12 @@ export default {
         return {
             postCount: null,
             posts: [],
-            organisationFullName: "",
+            orgName: "",
             address: "",
             phone: "",
-            schedule: "",
+            workTimeStart: "",
+            workTimeEnd: "",
+            email: "",
         };
     },
     computed: {
@@ -118,6 +128,7 @@ export default {
         updatePostCount(event) {
             const value = event.target.value;
             this.postCount = value === "" ? null : Number(value);
+            localStorage.setItem("postCount", this.postCount);
         },
         handlePostCountFocus() {
             if (this.postCount === null) {
@@ -176,32 +187,28 @@ export default {
                 this.phone = "";
             }
         },
-        formatTime(value) {
-            let formattedValue = value.replace(/[^0-9:-]/g, "");
-            formattedValue = formattedValue.replace(/^(\d{2})(\d{2})/, "$1:$2-");
-            formattedValue = formattedValue.replace(/(\d{2})(?=\d{2})/g, "$1:");
-            formattedValue = formattedValue.slice(0, 11);
-            this.schedule = formattedValue;
-        },
         removeService(postIndex, serviceIndex) {
             this.posts[postIndex].services.splice(serviceIndex, 1);
             this.saveServicesToStorage();
         },
         submitHandler() {
             const formData = {
-                organisationFullName: this.organisationFullName,
+                orgName: this.orgName,
                 address: this.address,
                 phone: this.phone,
-                schedule: this.schedule,
+                workTimeStart: this.workTimeStart + ":00",
+                workTimeEnd: this.workTimeEnd + ":00",
                 posts: JSON.parse(JSON.stringify(this.posts)),
             };
 
             this.$store.commit("SET_CONTACT_INFO_ADMIN", formData);
+            this.$store.commit("SET_ADMIN_INFO", formData);
             this.$store.commit("SET_POST_COUNT", this.postCount);
             localStorage.setItem("contactInfo", JSON.stringify(formData));
             localStorage.setItem("postCount", this.postCount);
             this.$router.push("/account");
         },
+
         saveServicesToStorage() {
             localStorage.setItem("services", JSON.stringify(this.posts));
         },
@@ -216,15 +223,29 @@ export default {
         const savedContactInfo = localStorage.getItem("contactInfo");
         if (savedContactInfo) {
             const contactInfo = JSON.parse(savedContactInfo);
-            this.organisationFullName = contactInfo.organisationFullName || "";
+            this.orgName = contactInfo.orgName || "";
             this.address = contactInfo.address || "";
             this.phone = contactInfo.phone || "";
-            this.schedule = contactInfo.schedule || "";
+            this.workTimeStart = contactInfo.workTimeStart ? contactInfo.workTimeStart.slice(0, 5) : "";
+            this.workTimeEnd = contactInfo.workTimeEnd ? contactInfo.workTimeEnd.slice(0, 5) : "";
             this.posts = contactInfo.posts || [];
             this.postCount = contactInfo.posts ? contactInfo.posts.length : null;
         }
+        const savedPostCount = localStorage.getItem("postCount");
+        if (savedPostCount) {
+            this.postCount = Number(savedPostCount);
+        }
         this.updatePosts(this.postCount);
         this.loadServicesFromStorage();
+
+        const savedEmail = localStorage.getItem("email");
+        const savedName = localStorage.getItem("name");
+        if (savedEmail) {
+            this.email = savedEmail;
+        }
+        if (savedName) {
+            this.name = savedName;
+        }
     },
 };
 </script>

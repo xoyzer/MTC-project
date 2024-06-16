@@ -44,7 +44,7 @@
                 <h2>
                     Нет аккаунта?
                     <a href="#">
-                        <router-link to="/userRegister"> <span>Зарегистрируйтесь!</span></router-link></a
+                        <router-link to="/clientsRegister"> <span>Зарегистрируйтесь!</span></router-link></a
                     >
                 </h2>
             </label>
@@ -64,13 +64,17 @@ export default {
             const passwordInput = this.$refs.passwordInput;
             passwordInput.type === "password" ? (passwordInput.type = "text") : (passwordInput.type = "password");
         },
-        submitHandler() {
-            const formData = {
-                email: this.login,
+        async submitHandler() {
+            const credentials = {
+                login: this.login,
                 password: this.password,
             };
-            console.log(formData);
-            this.$router.push("/cart");
+            try {
+                await this.$store.dispatch("loginUser", credentials);
+                this.$router.push("/cart");
+            } catch (error) {
+                console.error("Ошибка входа:", error);
+            }
         },
     },
 };

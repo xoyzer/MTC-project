@@ -2,9 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     {
-        path: "/adminRegister",
-        name: "adminRegister",
-        component: () => import("@/views/desktop/AdminRegister.vue"),
+        path: "/adminsRegister",
+        name: "adminsRegister",
+        component: () => import("@/views/desktop/AdminsRegister.vue"),
+    },
+    {
+        path: "/adminsLogin",
+        name: "adminsLogin",
+        component: () => import("@/views/desktop/AdminsLogin.vue"),
     },
     {
         path: "/info",
@@ -12,19 +17,19 @@ const routes = [
         component: () => import("@/views/desktop/Info.vue"),
     },
     {
-        path: "/account",
+        path: "/",
         name: "account",
         component: () => import("@/views/desktop/Account.vue"),
     },
     {
-        path: "/userlogin",
-        name: "userlogin",
-        component: () => import("@/views/mobile/UserLogin.vue"),
+        path: "/clientsLogin",
+        name: "clientsLogin",
+        component: () => import("@/views/mobile/ClientsLogin.vue"),
     },
     {
-        path: "/userRegister",
-        name: "userRegister",
-        component: () => import("@/views/mobile/UserRegister.vue"),
+        path: "/clientsRegister",
+        name: "clientsRegister",
+        component: () => import("@/views/mobile/ClientsRegister.vue"),
     },
     {
         path: "/map",
